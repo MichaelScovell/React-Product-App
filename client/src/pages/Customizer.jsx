@@ -43,7 +43,11 @@ const Customizer = () => {
 				return <ColorPicker/>
 			// If tab is the file picker, return the file picker component
 			case "filepicker":
-				return <FilePicker/>
+				return <FilePicker
+					file={file}
+					setFile={setFile}
+					readFile={readFile}
+					/>
 			// If tab is the ai picker, return the ai picker component
 			case "aipicker":
 				return <AIPicker/>
@@ -53,6 +57,57 @@ const Customizer = () => {
 		}
 	}
 
+	// Define a function for handling decals (obtained from readFiles)
+	const handleDecals = (type, result) => {
+		// Define variable for obtaining decalType
+		const decalType = DecalTypes[type];
+		// Obtain state of decal
+		state[decalType.stateProperty] = result;
+
+		// Check currently active decal
+		if(!activeFilterTab[decalType.filterTab]) {
+			// Call the HandleActiveFilterTab
+			handleActiveFilterTab(decalType.filterTab);
+		}
+	}
+
+	// Define a function for handling the active filter tab
+	const handleActiveFilterTab = (tabName) => {
+		switch (tabName) {
+			// If logoShirt is active
+			case "logoShirt":
+				// Toggle LogoShirt texture 
+				state.isLogoTexture = !activeFilterTab[tabName];
+				break;
+			// Toggle stylishShirt active
+			case "stylishShirt":
+				state.isFullTexture = !activeFilterTab[tabName];
+				break;
+			// Else default
+			default:
+				state.isLogoTexture = true;
+				state.isFullTexture = false;
+				break;
+		}
+		// Set active filter tab to update UI after state change
+		setActiveFilterTab((prevState) => {
+			return {
+				...prevState,
+				[tabName]: !prevState[tabName]
+			}
+		})
+	}
+
+	// Define a function for reading files and display content as rendered decals for the shirt
+	const readFile = (type) => {
+		// Pass file to Reader, to obtain files details
+		reader(file)
+		.then((result) => {
+			// Display returned result as decals to be displayed on the shirt
+			handleDecals(type, result);
+			setActiveEditorTab("");
+		})
+	}
 
 
   return (
@@ -93,8 +148,8 @@ const Customizer = () => {
                     key={tab.name}
                     tab={tab}
                     isFilterTab
-                    isActiveTab=""
-                    handleClick={() => {}}
+                    isActiveTab={activeFilterTab[tab.name]}
+                    handleClick={() => handleActiveFilterTab(tab.name)}
                   >
                   </Tab>
                 ))}
