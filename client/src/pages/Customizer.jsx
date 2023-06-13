@@ -79,7 +79,7 @@ const Customizer = () => {
 				// Toggle LogoShirt texture 
 				state.isLogoTexture = !activeFilterTab[tabName];
 				break;
-			// If stylishShirt active
+			// Toggle stylishShirt active
 			case "stylishShirt":
 				state.isFullTexture = !activeFilterTab[tabName];
 				break;
@@ -89,6 +89,13 @@ const Customizer = () => {
 				state.isFullTexture = false;
 				break;
 		}
+		// Set active filter tab to update UI after state change
+		setActiveFilterTab((prevState) => {
+			return {
+				...prevState,
+				[tabName]: !prevState[tabName]
+			}
+		})
 	}
 
 	// Define a function for reading files and display content as rendered decals for the shirt
@@ -141,8 +148,8 @@ const Customizer = () => {
                     key={tab.name}
                     tab={tab}
                     isFilterTab
-                    isActiveTab=""
-                    handleClick={() => {}}
+                    isActiveTab={activeFilterTab[tab.name]}
+                    handleClick={() => handleActiveFilterTab(tab.name)}
                   >
                   </Tab>
                 ))}
