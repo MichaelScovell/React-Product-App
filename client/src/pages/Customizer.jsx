@@ -24,12 +24,43 @@ import {
 const Customizer = () => {
   // Check state
   const snap = useSnapshot(state);
+
+	// Define a local state variable for file, prompt and loading
+	const [file, setFile] = useState('');
+	const [prompt, setPrompt] = useState('');
+	const [generatingImg, setGeneratingImg] = useState(false);
+	const [activeEditorTab, setActiveEditorTab] = useState('');
+	const [activeFilterTab, setActiveFilterTab] = useState({
+		logoShirt: true,
+		stylishShirt: false
+	})	
+
+	// Define a new function for displaying tab content depending on the activeTab
+	const generateTabContent = () => {
+		switch (activeEditorTab) {
+			// If tab is the color picker, return the color picker component
+			case "colorpicker":
+				return <ColorPicker/>
+			// If tab is the file picker, return the file picker component
+			case "filepicker":
+				return <FilePicker/>
+			// If tab is the ai picker, return the ai picker component
+			case "aipicker":
+				return <AIPicker/>
+			// Else, return null (as no options have been selected)
+			default:
+				return null;
+		}
+	}
+
+
+
   return (
     // Wrap in animation
     <AnimatePresence>
       {!snap.intro && (
         <>
-          {/* Motion Div for the AI, Color and File Picker UI */}
+          {/* Motion Div for the AI, Color and File Picker UI - EDITOR TABS */}
           <motion.div
             key="custom"
             className="absolute top-0 left-0 z-10"
@@ -42,10 +73,12 @@ const Customizer = () => {
                   <Tab
                     key={tab.name}
                     tab={tab}
-                    handleClick={() => {}}
+                    handleClick={() => setActiveEditorTab(tab.name)}
                   >
                   </Tab>
                 ))}
+								{/* Calling the generateTabContent function */}
+								{generateTabContent()}
               </div>
             </div>
           </motion.div>
