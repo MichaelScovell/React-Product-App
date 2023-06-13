@@ -50,10 +50,33 @@ const Customizer = () => {
 					/>
 			// If tab is the ai picker, return the ai picker component
 			case "aipicker":
-				return <AIPicker/>
+				return <AIPicker
+					prompt={prompt} 
+					setPrompt={setPrompt}
+					generatingImg={generatingImg}
+					handleSubmit={handleSubmit}
+					/>
 			// Else, return null (as no options have been selected)
 			default:
 				return null;
+		}
+	}
+
+	// Define a function for handling the AI submit
+	const handleSubmit = async (type) => {
+		// Check that there is not a prompt
+		if (!prompt) {
+			return alert("Please enter a prompt")
+		}
+		try {
+			// Invoke our backend to generate an AI image
+			
+		} catch (error) {
+			alert(error)
+		} finally {
+			// Reset the loader
+			setGeneratingImg(false);
+			setActiveEditorTab("")
 		}
 	}
 
