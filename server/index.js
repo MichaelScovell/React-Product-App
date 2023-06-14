@@ -1,3 +1,7 @@
+// Express Server
+// This file contains logic for our express server that will serve the OpenAI Dalle generation functionality
+
+// Defining imports for our express server
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';

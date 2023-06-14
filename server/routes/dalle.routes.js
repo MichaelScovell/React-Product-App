@@ -1,3 +1,6 @@
+// Dalle.Routes file contains the associated backend logic needed to create the dalle route for enabling the user to generate logos and textures
+
+// Defining imports
 import express, { json } from 'express'
 import * as dotenv from 'dotenv';
 import { Configuration, OpenAIApi } from 'openai';
@@ -26,12 +29,7 @@ router.route('/').post(async (req, res) => {
 		// Capturing prompt in request body
 		const { prompt } = req.body;
 
-		console.log('request:', {
-			prompt,
-			n: 1,
-			size: '1024x1024',
-			response_format: 'b64_json'
-		});
+		// Creating our request for generating images using Dalle from OpenAI
 
 		// Structuring the request to generate the image
 		const response = await openai.createImage({
@@ -45,10 +43,10 @@ router.route('/').post(async (req, res) => {
 		const image = response.data.data[0].b64_json;
 		// Return generated image
 		res.status(200).json({ photo: image });
-
+		// Catch and log errors if generation was unsucessfull
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ message: "Something went wrong - are you getting this", response: JSON.stringify(error) })
+		res.status(500).json({ message: "Something went wrong" })
 	}
 })
 
