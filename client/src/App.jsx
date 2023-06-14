@@ -1,3 +1,4 @@
+// App file used in defining the components used in the rendering the app within the main file
 // Defining imports
 import Canvas from "./canvas";
 import Customizer from "./pages/Customizer";

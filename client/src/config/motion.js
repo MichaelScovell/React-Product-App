@@ -1,3 +1,4 @@
+// Motion.JS contains helper functions used in displaying motion affects within the application
 export const transition = { type: "spring", duration: 0.8 };
 
 export const slideAnimation = (direction) => {

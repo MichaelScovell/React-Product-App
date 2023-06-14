@@ -1,4 +1,5 @@
 // Customizer page
+// This page contains both the logic and UI needed for users to create custom shirts using AI, File and Color Pickers whilst also toggling full and logo textures
 
 // Imports for libs and helper functions
 import React, { useState, useEffect } from "react";
@@ -22,7 +23,7 @@ import {
 } from "../components";
 
 const Customizer = () => {
-  // Check state
+  // Check state from state file
   const snap = useSnapshot(state);
 
 	// Define a local state variable for file, prompt and loading
@@ -62,7 +63,7 @@ const Customizer = () => {
 		}
 	}
 
-	// Define a function for handling the AI submit
+	// Define a function for handling the AI submit through invoking the backend
 	const handleSubmit = async (type) => {
 		// Check that there is not a prompt
 		if (!prompt) {
@@ -82,7 +83,6 @@ const Customizer = () => {
           prompt,
         })
       })
-
 			// Fetch the response from the api call
 			const data = await response.json()
 
@@ -150,7 +150,6 @@ const Customizer = () => {
 		})
 	}
 
-
   return (
     // Wrap in animation
     <AnimatePresence>
@@ -173,8 +172,8 @@ const Customizer = () => {
                   >
                   </Tab>
                 ))}
-								{/* Calling the generateTabContent function */}
-								{generateTabContent()}
+				{/* Calling the generateTabContent function */}
+				{generateTabContent()}
               </div>
             </div>
           </motion.div>
