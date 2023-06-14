@@ -1,11 +1,15 @@
+// Tab Component
+// This component contains the UI needed to display tabs (vertically and horizontally) that encase the application's features (AI, Color and File Picker as well as toggling off logo and textures)
+
+// Define imports
 import React from 'react'
 import { useSnapshot } from 'valtio'
 import state from '../store'
 
 const Tab = ({tab, isFilterTab, isActiveTab, handleClick}) => {
-	// Define state
+	// Define state from state file
 	const snap = useSnapshot(state);
-	// Define active styles var
+	// Define active styles variable for determining currentStyle
 	const activeStyles = isFilterTab && isActiveTab ? {backgroundColor: snap.color, opacity: 0.5} : {backgroundColor: 'transparent', opacity: 1 }
 	return (
 		// Tab Component

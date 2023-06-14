@@ -1,3 +1,4 @@
+// Constants file contains helper utilities that are used app wide
 import { swatch, fileIcon, ai, logoShirt, stylishShirt } from "../assets";
 
 export const EditorTabs = [

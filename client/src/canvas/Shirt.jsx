@@ -1,3 +1,6 @@
+// Shirt Model component
+// This component will house the logic and UI needed for the shirt model, which will be rendered within the canvas (index.js)
+
 // Defining imports for our Shirt Model
 import React from 'react'
 import {easing} from 'maath'
@@ -7,22 +10,23 @@ import { Decal, useGLTF, useTexture } from '@react-three/drei'
 import state from '../store'
 
 const Shirt = () => {
-	// Checking state
+	// Checking state from state file
   const snap = useSnapshot(state);
-	// Loading in our materials and model
+	// Loading in our model's materials and model
 	const {nodes, materials} = useGLTF('/shirt_baked.glb');
 	const logoTexture = useTexture(snap.logoDecal);
 	const fullTexture = useTexture(snap.fullDecal);
 
-	//Apply Color
+	// Apply Color to shirt model - initial styling
 	useFrame((state, delta) => easing.dampC(materials.lambert1.color,snap.color, 0.25, delta));
 
 	// Creating state for updating the shirt color
 	const stateString = JSON.stringify(snap)
 
+	// Shirt UI 
 	return (
 		<group key={stateString}>
-			{/* Rendering our Model */}
+			{/* Rendering our Model - by defining a mesh */}
 			<mesh 
 			castShadow
 			geometry={nodes.T_Shirt_male.geometry}

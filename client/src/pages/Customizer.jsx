@@ -1,4 +1,5 @@
 // Customizer page
+// This page contains both the logic and UI needed for users to create custom shirts using AI, File and Color Pickers whilst also toggling full and logo textures
 
 // Imports for libs and helper functions
 import React, { useState, useEffect } from "react";
@@ -22,7 +23,7 @@ import {
 } from "../components";
 
 const Customizer = () => {
-  // Check state
+  // Check state from state file
   const snap = useSnapshot(state);
 
 	// Define a local state variable for file, prompt and loading
@@ -50,10 +51,50 @@ const Customizer = () => {
 					/>
 			// If tab is the ai picker, return the ai picker component
 			case "aipicker":
-				return <AIPicker/>
+				return <AIPicker
+					prompt={prompt} 
+					setPrompt={setPrompt}
+					generatingImg={generatingImg}
+					handleSubmit={handleSubmit}
+					/>
 			// Else, return null (as no options have been selected)
 			default:
 				return null;
+		}
+	}
+
+	// Define a function for handling the AI submit through invoking the backend
+	const handleSubmit = async (type) => {
+		// Check that there is not a prompt
+		if (!prompt) {
+			return alert("Please enter a prompt")
+		}
+		try {
+			// Invoke our backend to generate an AI image
+			// Set generatingImg state
+			setGeneratingImg(true);
+			// Send the request to the backend api
+      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt,
+        })
+      })
+			// Fetch the response from the api call
+			const data = await response.json()
+
+			// Obtain the return image and apply to model
+			handleDecals(type, `data:image/png;base64,${data.photo}`)
+			
+		} catch (error) {
+			alert(error)
+		} finally {
+			// Reset the loader
+			setGeneratingImg(false);
+			setActiveEditorTab("")
 		}
 	}
 
@@ -109,7 +150,6 @@ const Customizer = () => {
 		})
 	}
 
-
   return (
     // Wrap in animation
     <AnimatePresence>
@@ -132,8 +172,8 @@ const Customizer = () => {
                   >
                   </Tab>
                 ))}
-								{/* Calling the generateTabContent function */}
-								{generateTabContent()}
+				{/* Calling the generateTabContent function */}
+				{generateTabContent()}
               </div>
             </div>
           </motion.div>

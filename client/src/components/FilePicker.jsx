@@ -1,3 +1,8 @@
+// File Picker Component
+// This component contains the UI for enabling a user to upload a file
+// Logic is housed witin the customizer page (./pages/customizer)
+
+// Defining imports
 import React from "react";
 import CustomButton from "./CustomButton";
 

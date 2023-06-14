@@ -1,3 +1,5 @@
+
+// State File used in storing and retrieving application state
 import { proxy } from "valtio";
 
 // Define state (proxy simillar to usecontext)

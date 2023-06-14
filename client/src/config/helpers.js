@@ -1,3 +1,4 @@
+// Helpers.JS contains helper functions that are used application wide
 export const downloadCanvasToImage = () => {
   const canvas = document.querySelector("canvas");
   const dataURL = canvas.toDataURL();
