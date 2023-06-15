@@ -43,7 +43,7 @@ router.route('/').post(async (req, res) => {
 		const image = response.data.data[0].b64_json;
 		// Return generated image
 		res.status(200).json({ photo: image });
-		// Catch and log errors if generation was unsucessfull
+		// Catch and log errors if generation was unsuccessful
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ message: "Something went wrong" })
