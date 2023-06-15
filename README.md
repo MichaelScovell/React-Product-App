@@ -15,11 +15,11 @@ This project is following JavaScript Mastery's: Build and Deploy an AI-Powered 3
 7. Once run, you are set to use the application.
 
 ### Technologies
-Threejs - 3D JavaScript Library used in rendering models
-React - Used for creating the frontend app
-OpenAI API (Dalle) - Used in enabling users to generate logos and textures for their shirts using Dalle (API Call).
-Express - used for creating the backend server and API for interacting with both OpenAI and the client (front end).
-Tailwind CSS - Used for styling the application
+- Threejs - 3D JavaScript Library used in rendering models
+- React - Used for creating the frontend app
+- OpenAI API (Dalle) - Used in enabling users to generate logos and textures for their shirts using Dalle (API Call).
+- Express - used for creating the backend server and API for interacting with both OpenAI and the client (front end).
+- Tailwind CSS - Used for styling the application
 
 #### Images of the Application
 ##### Home Page
