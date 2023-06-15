@@ -29,4 +29,5 @@ Tailwind CSS - Used for styling the application
 ![Customization Page](https://github.com/MichaelScovell/React-Product-App/assets/77600300/41efaa73-b03d-4319-89aa-c57602e2e6ac)
 
 ##### AI Generated Shirt Pattern
+![AI Generated Shirt Pattern](https://github.com/MichaelScovell/React-Product-App/assets/77600300/c29c1ee4-c601-4447-91a9-4f2eddb25ee8)
 
