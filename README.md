@@ -11,7 +11,7 @@ This project is following JavaScript Mastery's: Build and Deploy an AI-Powered 3
 3. CD to the Server Folder  and run `npm install` to install the backend server dependencies.
 4. Once installed, within the server directory create an env file and update it with your OpenAI API key (NOTE: an OpenAI account will need to be created first - see API documentation link https://platform.openai.com/docs/api-reference/introduction).
 5. Once added, run `npm run start` within the terminal to start the backend server.
-6. Within a new terminal instance, cd to the client folder and run 'npm run dev' to start the frontend.
+6. Within a new terminal instance, cd to the client folder and run `npm run dev` to start the frontend.
 7. Once run, you are set to use the application.
 
 ### Technologies
